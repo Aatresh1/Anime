@@ -1,137 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Anime Fan Site</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-    }
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-    nav {
-      background: #444;
-      color: white;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 10px;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    section {
-      padding: 20px;
-    }
-    .form-section {
-      max-width: 600px;
-      margin: 40px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .form-section h2 {
-      text-align: center;
-      color: #333;
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 20px;
-    }
-    input[type="text"],
-    input[type="email"],
-    textarea {
-      width: 100%;
-      padding: 12px;
-      margin-top: 8px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
-      resize: vertical;
-    }
-    input[type="submit"] {
-      background-color: #4CAF50;
-      color: white;
-      padding: 14px 20px;
-      margin-top: 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    input[type="submit"]:hover {
-      background-color: #45a049;
-    }
-    .email-display {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 16px;
-      color: #555;
-    }
-    footer {
-      background: #333;
-      color: #fff;
-      text-align: center;
-      padding: 10px;
-      margin-top: 40px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Preferences Hub</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f0f4ff, #ffebff);
+            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #e0e0e0;
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            font-weight: bold;
+            transition: transform 0.2s, color 0.2s;
+        }
+
+        nav a:hover {
+            color: #ff6f61;
+            transform: scale(1.1);
+        }
+
+        #theme-toggle {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        section {
+            padding: 5rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        h1, h2 {
+            margin-bottom: 1.5rem;
+            font-family: 'Anime Ace', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ff6f61;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: #e94560;
+        }
+
+        #home {
+            background: url('https://images.unsplash.com/photo-1618005182380-5c7f8f64c711') no-repeat center/cover;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        #home > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        #about {
+            background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,235,255,0.9));
+        }
+
+        body.dark-mode #about {
+            background: linear-gradient(to bottom, rgba(26,26,46,0.9), rgba(22,33,62,0.9));
+        }
+
+        #preferences {
+            background: linear-gradient(to bottom, #f4f4f4, #fff);
+        }
+
+        body.dark-mode #preferences {
+            background: linear-gradient(to bottom, #16213e, #1a1a2e);
+        }
+
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        body.dark-mode .quiz-container {
+            background: rgba(26, 26, 46, 0.95);
+        }
+
+        .quiz-option {
+            margin: 1rem 0;
+            padding: 0.75rem;
+            background: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .quiz-option:hover {
+            background: #e94560;
+            transform: translateY(-3px);
+        }
+
+        #quiz-result {
+            margin-top: 1.5rem;
+            font-weight: bold;
+            color: #e94560;
+        }
+
+        #contact {
+            background: linear-gradient(to bottom, rgba(255,235,255,0.9), rgba(255,255,255,0.9));
+        }
+
+        body.dark-mode #contact {
+            background: linear-gradient(to bottom, rgba(22,33,62,0.9), rgba(26,26,46,0.9));
+        }
+
+        #contact-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 500px;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode #contact-form {
+            background: rgba(26, 26, 46, 0.95);
+        }
+
+        #contact-form input,
+        #contact-form textarea {
+            padding: 0.75rem;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+
+        body.dark-mode #contact-form input,
+        body.dark-mode #contact-form textarea {
+            background: #333;
+            color: #e0e0e0;
+            border-color: #555;
+        }
+
+        #contact-form input:focus,
+        #contact-form textarea:focus {
+            border-color: #ff6f61;
+            outline: none;
+        }
+
+        #contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        #contact-form button {
+            padding: 0.75rem;
+            background: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        #contact-form button:hover {
+            background: #e94560;
+            transform: translateY(-3px);
+        }
+
+        #form-message {
+            margin-top: 1.5rem;
+            color: #e94560;
+            font-weight: bold;
+        }
+
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 107, 97, 0.5);
+            border-radius: 50%;
+            animation: float 10s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0.8; }
+            50% { opacity: 0.4; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Welcome to My Anime Fan Site</h1>
-  </header>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#preferences">Preferences</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><button id="theme-toggle">🌙</button></li>
+        </ul>
+    </nav>
 
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#form">Form</a>
-  </nav>
+    <!-- Particles Background -->
+    <div id="particles"></div>
 
-  <section id="home">
-    <h2>Home</h2>
-    <p>This is a place for anime fans to connect and share their favorite series!</p>
-  </section>
+    <!-- Home Section -->
+    <section id="home">
+        <h1>Anime Preferences Hub</h1>
+        <p>Discover your anime style and share your passion!</p>
+    </section>
 
-  <section id="about">
-    <h2>About</h2>
-    <p>We love anime and want to know what you're into. Fill out the form and join the community!</p>
-  </section>
+    <!-- About Section -->
+    <section id="about">
+        <h2>About This Site</h2>
+        <p>I'm an anime enthusiast who loves exploring genres, characters, and stories. This site is my space to share my favorite anime preferences and help you find yours through a fun quiz!</p>
+    </section>
 
-  <section id="form" class="form-section">
-    <h2>Anime Interest Form</h2>
-    <div class="email-display">
-      Displayed your email: <strong>g.aatresh@gmail.com</strong>
-    </div>
-    <form action="mailto:g.aatresh@gmail.com" method="post" enctype="text/plain">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="Name" required>
+    <!-- Preferences Section -->
+    <section id="preferences">
+        <h2>Your Anime Preferences</h2>
+        <div class="quiz-container">
+            <p>What kind of anime vibe do you love?</p>
+            <button class="quiz-option" data-type="shonen">Action-Packed Shonen</button>
+            <button class="quiz-option" data-type="shojo">Romantic Shojo</button>
+            <button class="quiz-option" data-type="isekai">Epic Isekai</button>
+            <button class="quiz-option" data-type="slice-of-life">Chill Slice-of-Life</button>
+            <p id="quiz-result"></p>
+        </div>
+    </section>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="Email" required>
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form id="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <label for="message">Your Favorite Anime:</label>
+            <textarea id="message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <p id="form-message"></p>
+    </section>
 
-      <label for="fav-anime">Favorite Anime:</label>
-      <input type="text" id="fav-anime" name="Favorite Anime" required>
+    <script>
+        // Smooth Scrolling
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(event) {
+                event.preventDefault();
+                const sectionId = this.getAttribute('href');
+                document.querySelector(sectionId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
 
-      <label for="watched-anime">What All Anime Have You Watched?</label>
-      <textarea id="watched-anime" name="Anime Watched" rows="4" required></textarea>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
 
-      <input type="submit" value="Submit">
-    </form>
-  </section>
+        // Quiz Logic
+        const quizButtons = document.querySelectorAll('.quiz-option');
+        const quizResult = document.getElementById('quiz-result');
+        quizButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const type = button.dataset.type;
+                let resultText = "";
+                switch (type) {
+                    case 'shonen': resultText = "You're into exciting action and epic battles!"; break;
+                    case 'shojo': resultText = "Romance and beautiful moments are your thing!"; break;
+                    case 'isekai': resultText = "You love fantasy adventures in new worlds!"; break;
+                    case 'slice-of-life': resultText = "You enjoy the calm and charm of everyday life."; break;
+                }
+                quizResult.textContent = resultText;
+            });
+        });
 
-  <footer>
-    <p>&copy; 2025 My Anime Fan Site. All rights reserved.</p>
-  </footer>
+        // Contact Form
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const formMsg = document.getElementById('form-message');
+
+            if (name && email && message) {
+                formMsg.textContent = Thanks ${name}! Your favorite anime has been noted.;
+                this.reset();
+            } else {
+                formMsg.textContent = "Please fill in all fields.";
+            }
+        });
+
+        // Particles Background
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = ${Math.random() * 100}%;
+                particle.style.animationDuration = ${5 + Math.random() * 10}s;
+                particle.style.animationDelay = ${Math.random() * 10}s;
+                particle.style.top = ${Math.random() * 100}vh;
+                particles.appendChild(particle);
+            }
+        }
+
+        createParticles();
+    </script>
 </body>
 </html>
