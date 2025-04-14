@@ -49,7 +49,6 @@
             padding: 0.5rem 1.5rem;
             font-weight: bold;
             transition: transform 0.2s, color 0.2s, text-shadow 0.2s;
-            position: relative;
         }
 
         nav a:hover {
@@ -262,12 +261,17 @@
             font-size: 1.5rem;
             font-weight: bold;
             text-decoration: none;
-            transition: color 0.2s, text-shadow 0.2s;
+            padding: 0.5rem 1rem;
+            border: 2px solid #ff6f61;
+            border-radius: 8px;
+            transition: color 0.2s, text-shadow 0.2s, background 0.2s;
+            display: inline-block;
         }
 
         .email-link:hover {
-            color: #e94560;
+            color: #fff;
             text-shadow: 0 0 10px #e94560;
+            background: #e94560;
         }
 
         /* Animated Background Particles */
@@ -293,7 +297,7 @@
         @keyframes float {
             0% { transform: translateY(100vh) scale(0.5); opacity: 0.8; }
             50% { opacity: 0.4; }
-            100% { transform: translateY(-100vh) scale( random() * 0.5 + 0.5 ); opacity: 0; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
         }
 
         /* Anime Info Section */
@@ -365,10 +369,9 @@
     <!-- Anime Info Section -->
     <section id="anime-info" style="padding: 5rem 2rem; text-align: center; background: linear-gradient(to bottom, #fff0f5, #f0f4ff); color: #222;">
         <h2 style="color: #e94560; font-size: 2.4rem; margin-bottom: 2rem;">🌟 Dive Deeper into the Anime World</h2>
-
         <!-- Crunchyroll Awards -->
         <div style="max-width: 800px; margin: auto; text-align: left;">
-            <h            <h3 style="color: #ff6f61; font-size: 1.8rem;">🏆 Crunchyroll Anime Awards 2024 Highlights</h3>
+            <h3 style="color: #ff6f61; font-size: 1.8rem;">🏆 Crunchyroll Anime Awards 2024 Highlights</h3>
             <ul style="margin-top: 1rem; line-height: 1.8;">
                 <li><strong>Anime of the Year:</strong> <em>Jujutsu Kaisen Season 2</em></li>
                 <li><strong>Best Animation:</strong> <em>Demon Slayer: Swordsmith Village Arc</em></li>
@@ -377,7 +380,6 @@
                 <li><strong>Best Score:</strong> <em>Attack on Titan Final Season</em></li>
             </ul>
         </div>
-
         <!-- Where to Watch -->
         <div style="margin-top: 4rem; text-align: left;">
             <h3 style="color: #ff6f61; font-size: 1.8rem;">📺 Where to Watch Anime in India</h3>
@@ -389,7 +391,6 @@
                 <li><a href="https://aniwatch.to/home" target="_blank" style="color: #e94560; font-weight: bold;">Aniwatch.to</a> – Free with a massive collection (unofficial)</li>
             </ul>
         </div>
-
         <!-- Anime Recommendations -->
         <div style="margin-top: 4rem; text-align: left;">
             <h3 style="color: #ff6f61; font-size: 1.8rem;">🔥 Must-Watch Anime Picks</h3>
@@ -401,7 +402,6 @@
                 <li><strong>For Slice of Life:</strong> <em>Barakamon, March Comes In Like a Lion</em></li>
             </ul>
         </div>
-
         <!-- Anime Clothing Stores -->
         <div style="margin-top: 4rem; text-align: left;">
             <h3 style="color: #ff6f61; font-size: 1.8rem;">🛍️ Anime Merch & Apparel (India)</h3>
@@ -412,7 +412,6 @@
                 <li>🛒 Offline: <strong>Hamleys</strong>, <strong>Planet Superheroes (Mumbai)</strong>, Comic Con stalls</li>
             </ul>
         </div>
-
         <!-- Wallpaper Section -->
         <div style="margin-top: 4rem;">
             <h3 style="color: #ff6f61; font-size: 1.8rem;">🖼️ Free Anime Wallpaper</h3>
