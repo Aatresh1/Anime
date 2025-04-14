@@ -26,6 +26,7 @@
             color: #e0e0e0;
         }
 
+        /* Navigation */
         nav {
             background: rgba(0, 0, 0, 0.8);
             position: sticky;
@@ -64,6 +65,7 @@
             padding: 0.5rem;
         }
 
+        /* Sections */
         section {
             padding: 5rem 2rem;
             min-height: 100vh;
@@ -91,6 +93,7 @@
             color: #e94560;
         }
 
+        /* Home Section */
         #home {
             background: url('https://images.unsplash.com/photo-1618005182380-5c7f8f64c711') no-repeat center/cover;
             color: #fff;
@@ -114,6 +117,7 @@
             z-index: 1;
         }
 
+        /* About Section */
         #about {
             background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,235,255,0.9));
         }
@@ -122,6 +126,7 @@
             background: linear-gradient(to bottom, rgba(26,26,46,0.9), rgba(22,33,62,0.9));
         }
 
+        /* Preferences Section */
         #preferences {
             background: linear-gradient(to bottom, #f4f4f4, #fff);
         }
@@ -166,6 +171,7 @@
             color: #e94560;
         }
 
+        /* Contact Section */
         #contact {
             background: linear-gradient(to bottom, rgba(255,235,255,0.9), rgba(255,255,255,0.9));
         }
@@ -239,6 +245,7 @@
             font-weight: bold;
         }
 
+        /* Animated Background Particles */
         #particles {
             position: fixed;
             top: 0;
@@ -337,54 +344,135 @@
             themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
         });
 
-        // Quiz Logic
+        // Form Submission
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const formMessage = document.getElementById('form-message');
+            formMessage.textContent = Thanks, ${name}! I love that you picked ${message}!;
+            this.reset();
+        });
+
+        // Anime Quiz
         const quizButtons = document.querySelectorAll('.quiz-option');
         const quizResult = document.getElementById('quiz-result');
         quizButtons.forEach(button => {
             button.addEventListener('click', () => {
-                const type = button.dataset.type;
-                let resultText = "";
+                const type = button.getAttribute('data-type');
+                let resultText = '';
                 switch (type) {
-                    case 'shonen': resultText = "You're into exciting action and epic battles!"; break;
-                    case 'shojo': resultText = "Romance and beautiful moments are your thing!"; break;
-                    case 'isekai': resultText = "You love fantasy adventures in new worlds!"; break;
-                    case 'slice-of-life': resultText = "You enjoy the calm and charm of everyday life."; break;
+                    case 'shonen':
+                        resultText = 'You love high-energy battles and epic adventures! Try "Demon Slayer" or "My Hero Academia".';
+                        break;
+                    case 'shojo':
+                        resultText = 'Romance and emotions are your vibe! Check out "Fruits Basket" or "Ouran High School Host Club".';
+                        break;
+                    case 'isekai':
+                        resultText = 'You’re into otherworldly adventures! Watch "Re:Zero" or "Sword Art Online".';
+                        break;
+                    case 'slice-of-life':
+                        resultText = 'You enjoy relaxing, heartfelt stories! Try "March Comes in Like a Lion" or "Barakamon".';
+                        break;
                 }
                 quizResult.textContent = resultText;
             });
         });
 
-        // Contact Form
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
-            const formMsg = document.getElementById('form-message');
-
-            if (name && email && message) {
-                formMsg.textContent = Thanks ${name}! Your favorite anime has been noted.;
-                this.reset();
-            } else {
-                formMsg.textContent = "Please fill in all fields.";
-            }
-        });
-
-        // Particles Background
-        function createParticles() {
-            const particles = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                particle.style.left = ${Math.random() * 100}%;
-                particle.style.animationDuration = ${5 + Math.random() * 10}s;
-                particle.style.animationDelay = ${Math.random() * 10}s;
-                particle.style.top = ${Math.random() * 100}vh;
-                particles.appendChild(particle);
-            }
+        // Particle Animation
+        const particlesContainer = document.getElementById('particles');
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = ${Math.random() * 100}vw;
+            particle.style.animationDuration = ${Math.random() * 5 + 5}s;
+            particlesContainer.appendChild(particle);
+            setTimeout(() => particle.remove(), 10000);
         }
-
-        createParticles();
+        setInterval(createParticle, 500);
     </script>
+<!-- Extra Anime Content -->
+<section id="anime-info" style="padding: 5rem 2rem; text-align: center; background: linear-gradient(to bottom, #fff0f5, #f0f4ff); color: #222;">
+    <h2 style="color: #e94560; font-size: 2.4rem; margin-bottom: 2rem;">🌟 Dive Deeper into the Anime World</h2>
+
+    <!-- Crunchyroll Awards -->
+    <div style="max-width: 800px; margin: auto; text-align: left;">
+        <h3 style="color: #ff6f61; font-size: 1.8rem;">🏆 Crunchyroll Anime Awards 2024 Highlights</h3>
+        <ul style="margin-top: 1rem; line-height: 1.8;">
+            <li><strong>Anime of the Year:</strong> <em>Jujutsu Kaisen Season 2</em></li>
+            <li><strong>Best Animation:</strong> <em>Demon Slayer: Swordsmith Village Arc</em></li>
+            <li><strong>Best New Series:</strong> <em>Oshi no Ko</em></li>
+            <li><strong>Best Fight Scene:</strong> <em>Gojo vs. Toji</em></li>
+            <li><strong>Best Score:</strong> <em>Attack on Titan Final Season</em></li>
+        </ul>
+    </div>
+
+    <!-- Where to Watch -->
+    <div style="margin-top: 4rem; text-align: left;">
+        <h3 style="color: #ff6f61; font-size: 1.8rem;">📺 Where to Watch Anime in India</h3>
+        <ul style="margin-top: 1rem; line-height: 1.8;">
+            <li><a href="https://www.crunchyroll.com/" target="_blank" style="color: #e94560; font-weight: bold;">Crunchyroll</a> – Largest anime catalog with simulcasts</li>
+            <li><a href="https://www.netflix.com/in/" target="_blank" style="color: #e94560; font-weight: bold;">Netflix</a> – Great originals like <em>Devilman Crybaby</em>, <em>Yasuke</em></li>
+            <li><a href="https://www.primevideo.com/" target="_blank" style="color: #e94560; font-weight: bold;">Amazon Prime Video</a> – Hidden gems like <em>Made in Abyss</em></li>
+            <li><a href="https://www.disneyplus.com/in" target="_blank" style="color: #e94560; font-weight: bold;">Disney+ Hotstar</a> – <em>Bleach: Thousand-Year Blood War</em></li>
+            <li><a href="https://aniwatch.to/home" target="_blank" style="color: #e94560; font-weight: bold;">Aniwatch.to</a> – Free with a massive collection (unofficial)</li>
+        </ul>
+    </div>
+
+    <!-- Anime Recommendations -->
+    <div style="margin-top: 4rem; text-align: left;">
+        <h3 style="color: #ff6f61; font-size: 1.8rem;">🔥 Must-Watch Anime Picks</h3>
+        <ul style="margin-top: 1rem; line-height: 1.8;">
+            <li><strong>For Beginners:</strong> <em>My Hero Academia, Demon Slayer, Naruto</em></li>
+            <li><strong>For Rom-Com Fans:</strong> <em>Kaguya-sama: Love is War, Horimiya</em></li>
+            <li><strong>For Deep Thinkers:</strong> <em>Steins;Gate, Death Note, Monster</em></li>
+            <li><strong>For Fantasy Lovers:</strong> <em>Fullmetal Alchemist: Brotherhood, Vinland Saga</em></li>
+            <li><strong>For Slice of Life:</strong> <em>Barakamon, March Comes In Like a Lion</em></li>
+        </ul>
+    </div>
+
+    <!-- Anime Clothing Stores -->
+    <div style="margin-top: 4rem; text-align: left;">
+        <h3 style="color: #ff6f61; font-size: 1.8rem;">🛍️ Anime Merch & Apparel (India)</h3>
+        <ul style="margin-top: 1rem; line-height: 1.8;">
+            <li><a href="https://theotakustore.in/" target="_blank" style="color: #e94560; font-weight: bold;">The Otaku Store</a> – T-shirts, hoodies, posters</li>
+            <li><a href="https://comicclan.com/" target="_blank" style="color: #e94560; font-weight: bold;">Comicclan</a> – Licensed anime apparel</li>
+            <li><a href="https://www.redwolf.in/anime-merchandise" target="_blank" style="color: #e94560; font-weight: bold;">Redwolf</a> – Stylish anime tees and jackets</li>
+            <li>🛒 Offline: <strong>Hamleys</strong>, <strong>Planet Superheroes (Mumbai)</strong>, Comic Con stalls</li>
+        </ul>
+    </div>
+
+    <!-- Wallpaper Section -->
+    <div style="margin-top: 4rem;">
+        <h3 style="color: #ff6f61; font-size: 1.8rem;">🖼️ Free Anime Wallpaper</h3>
+        <p style="margin: 1rem 0;">Enjoy this high-resolution wallpaper from the anime universe!</p>
+        <a href="https://wallpapers.com/images/hd/cool-anime-art-x8oxvmpq04udfq7s.jpg" target="_blank">
+            <img src="https://wallpapers.com/images/hd/cool-anime-art-x8oxvmpq04udfq7s.jpg" alt="Anime Wallpaper" style="max-width:100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+        </a>
+    </div>
+</section>
+
+<!-- Dark Mode Styling -->
+<style>
+    body.dark-mode #anime-info {
+        background: linear-gradient(to bottom, #1a1a2e, #16213e);
+        color: #e0e0e0;
+    }
+
+    body.dark-mode #anime-info a {
+        color: #ff6f61;
+    }
+
+    body.dark-mode #anime-info ul li {
+        color: #ddd;
+    }
+
+    body.dark-mode #anime-info img {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+</style>
+
 </body>
+
 </html>
